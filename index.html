@@ -3,24 +3,52 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Para Você ❤️</title>
 
 <style>
+
 body{
     margin:0;
-    font-family:Arial, sans-serif;
+    font-family:Arial,sans-serif;
     background:linear-gradient(135deg,#ff4d6d,#ff8fab);
     color:white;
     text-align:center;
     overflow-x:hidden;
+    position:relative;
+}
+
+body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+
+    background:
+    radial-gradient(circle at 20% 20%,rgba(255,255,255,.20),transparent 30%),
+    radial-gradient(circle at 80% 50%,rgba(255,255,255,.15),transparent 30%),
+    radial-gradient(circle at 50% 90%,rgba(255,255,255,.20),transparent 30%);
+
+    pointer-events:none;
 }
 
 .container{
     padding:50px 20px;
+    position:relative;
+    z-index:2;
 }
 
 h1{
     font-size:3em;
+    text-shadow:0 0 20px rgba(255,255,255,.5);
+}
+
+.card{
+    max-width:700px;
+    margin:20px auto;
+    background:rgba(255,255,255,0.15);
+    padding:25px;
+    border-radius:20px;
+    backdrop-filter:blur(8px);
 }
 
 button{
@@ -32,26 +60,31 @@ button{
     border-radius:30px;
     font-size:18px;
     cursor:pointer;
-    transition:0.3s;
+    transition:.3s;
+    box-shadow:0 0 20px rgba(255,255,255,.4);
+
+    animation:pulsar 2s infinite;
 }
 
 button:hover{
-    transform:scale(1.1);
+    transform:scale(1.08);
 }
 
-.card{
-    max-width:700px;
-    margin:20px auto;
-    background:rgba(255,255,255,0.15);
-    padding:25px;
-    border-radius:20px;
-    backdrop-filter:blur(5px);
-}
+@keyframes pulsar{
 
-#motivo{
-    font-size:24px;
-    margin-top:20px;
-    min-height:40px;
+    0%{
+        transform:scale(1);
+    }
+
+    50%{
+        transform:scale(1.05);
+        box-shadow:0 0 30px rgba(255,255,255,.9);
+    }
+
+    100%{
+        transform:scale(1);
+    }
+
 }
 
 #contador{
@@ -60,20 +93,55 @@ button:hover{
     font-weight:bold;
 }
 
+#motivo{
+    font-size:24px;
+    margin-top:20px;
+    min-height:40px;
+}
+
 .heart{
     position:fixed;
-    color:white;
-    animation:fall 5s linear infinite;
     pointer-events:none;
+    z-index:1;
+
+    animation:fall linear forwards;
 }
 
 @keyframes fall{
+
     from{
         transform:translateY(-100px);
     }
+
     to{
         transform:translateY(110vh);
     }
+
+}
+
+.foto-bg{
+    position:fixed;
+    opacity:0.08;
+    pointer-events:none;
+    z-index:0;
+
+    animation:flutuar 8s ease-in-out infinite;
+}
+
+@keyframes flutuar{
+
+    0%{
+        transform:translateY(0px) rotate(-3deg);
+    }
+
+    50%{
+        transform:translateY(-15px) rotate(3deg);
+    }
+
+    100%{
+        transform:translateY(0px) rotate(-3deg);
+    }
+
 }
 
 #carta{
@@ -81,15 +149,19 @@ button:hover{
 }
 
 @keyframes aparecer{
+
     from{
         opacity:0;
         transform:translateY(20px);
     }
+
     to{
         opacity:1;
         transform:translateY(0);
     }
+
 }
+
 </style>
 </head>
 
@@ -110,15 +182,21 @@ Obrigado por cada sorriso, cada abraço e cada momento ao seu lado.
 
 <div id="contador"></div>
 
-<button onclick="abrirMusica()">🎵 Uma música que me representa ❤️</button>
+<button onclick="abrirMusica()">
+🎵 Uma música que me representa ❤️
+</button>
 
 <br>
 
-<button onclick="mostrarMotivo()">❤️ Por que eu te amo?</button>
+<button onclick="mostrarMotivo()">
+❤️ Por que eu te amo?
+</button>
 
 <div id="motivo"></div>
 
-<button onclick="mostrarCarta()">💌 Ler Minha Carta</button>
+<button onclick="mostrarCarta()">
+💌 Ler Minha Carta
+</button>
 
 <div id="carta"></div>
 
@@ -128,37 +206,60 @@ Obrigado por cada sorriso, cada abraço e cada momento ao seu lado.
 
 <script>
 
+for(let i=0;i<20;i++){
+
+    const img = document.createElement("img");
+
+    img.src="foto.png";
+
+    img.className="foto-bg";
+
+    img.style.left=Math.random()*100+"vw";
+    img.style.top=Math.random()*100+"vh";
+
+    img.style.width=(60+Math.random()*60)+"px";
+
+    document.body.appendChild(img);
+}
+
 function abrirMusica(){
+
     window.open(
         "https://www.youtube.com/watch?v=YuByvjwo-HQ",
         "_blank"
     );
+
 }
 
 const motivos = [
+
 "Porque eu esqueço do mundo quando estou com você.",
-"Porque você não me bloqueou depois de me conhecer de verdade 😂",
 "Porque eu amo cada detalhe seu.",
-"Porque você não reclama dos meus peidos.",
 "Porque você transforma momentos simples em lembranças incríveis.",
-"Porque aguenta minhas piadas ruins como se fossem boas.",
+"Porque aguenta minhas piadas ruins.",
 "Porque você me faz querer ser uma pessoa melhor.",
-"Porque você finge que eu sou normal.",
-"Porque ainda não me denunciou por excesso de racismo (sendo que eu sou preto). 😂",
 "Porque eu consigo ser eu mesmo quando estou com você.",
 "Porque você deixa meus dias mais felizes.",
 "Porque você faz qualquer lugar parecer especial.",
 "Porque até o silêncio ao seu lado é confortável.",
 "Porque você é minha pessoa favorita."
+
 ];
 
 function mostrarMotivo(){
-    const aleatorio = motivos[Math.floor(Math.random()*motivos.length)];
-    document.getElementById("motivo").innerHTML = aleatorio;
+
+    const aleatorio =
+    motivos[Math.floor(Math.random()*motivos.length)];
+
+    document.getElementById("motivo").innerHTML =
+    aleatorio;
+
 }
 
 function mostrarCarta(){
-document.getElementById("carta").innerHTML = `
+
+document.getElementById("carta").innerHTML=`
+
 <div class="card">
 
 <h2>💌 Uma Carta Para o Amor da Minha Vida</h2>
@@ -169,103 +270,94 @@ Meu amor,
 
 <br><br>
 
-Antes de continuar, coloca essa música para tocar. ❤️
+Obrigado por existir.
 
 <br><br>
 
-Ela me representa. Sempre que escuto, lembro de você e de tudo o que eu sinto.
+Você transformou meus dias em algo muito mais especial.
 
 <br><br>
 
-Quero que você saiba o quanto é importante para mim. Desde o momento em que te conheci, algo em você me fez ter certeza de que valia a pena insistir, conhecer, conversar e estar presente. Eu sempre disse que a distância nunca seria algo capaz de me impedir de te ver, porque quando alguém se torna especial, a gente dá um jeito.
+Cada conversa, cada risada e cada momento ao seu lado
+ficam guardados no meu coração.
 
 <br><br>
 
-Obrigado por fazer parte da minha vida, pelas risadas, pelas conversas, pelo carinho, pela paciência e por ser exatamente quem você é. Obrigado por ouvir minhas piadas ruins, por aguentar minhas manias, por rir das minhas besteiras e por me fazer sorrir até nos dias mais chatos.
+Você é a pessoa que eu escolho todos os dias.
 
 <br><br>
 
-Você é o meu "The Last Amor". Eu não quero procurar mais ninguém. Quero continuar escolhendo você todos os dias, porque quando penso no meu futuro, é você que eu imagino ao meu lado.
+E se eu pudesse escolher novamente,
+continuaria escolhendo você.
 
 <br><br>
 
-Com você eu aprendi que os melhores momentos não são necessariamente os mais caros, os mais planejados ou os mais incríveis. Às vezes é só nós dois conversando, assistindo alguma coisa, trocando carinho ou simplesmente ficando juntos sem fazer nada.
-
-<br><br>
-
-Eu amo o seu jeito, o seu sorriso, os seus olhos, o seu olhar e a pessoa que você é. Amo até as coisinhas que talvez você nem perceba em você mesma, mas que eu percebo.
-
-<br><br>
-
-Espero que este seja apenas o primeiro Dia dos Namorados de muitos que ainda vamos passar juntos. E olha que eu pretendo te aturar por bastante tempo, então você vai ter que me aturar também. ❤️
-
-<br><br>
-
-Eu oro por você e por nós todos os dias. Peço a Deus que cuide da sua vida, dos seus sonhos, da sua saúde e do seu coração. E todos os dias eu agradeço a Ele por ter colocado você no meu caminho.
-
-<br><br>
-
-Entre tantas pessoas no mundo, foi você que apareceu na minha vida, e sou muito grato por isso.
-
-<br><br>
-
-Você se tornou uma das melhores partes dos meus dias. Daquelas pessoas que a gente quer contar as coisas, compartilhar momentos e ter por perto.
-
-<br><br>
-
-E se algum dia você duvidar do que sinto, lembre-se de uma coisa: eu continuo aqui. Continuo te escolhendo, continuo fazendo planos com você e continuo agradecendo a Deus por ter você na minha vida.
-
-<br><br>
-
-Porque amar você é um presente. E ter você comigo é uma das melhores coisas que já me aconteceram.
-
-<br><br>
-
-Te amo hoje, amanhã, depois de amanhã e em todos os dias que ainda estão por vir.
-
-<br><br>
-
-❤️ Te amo ❤️
+❤️ Te amo infinitamente ❤️
 
 </p>
 
 </div>
+
 `;
+
 }
 
-const inicio = new Date("2025-02-14T22:00:00");
+const inicio = new Date("2026-02-14T22:47:00");
 
 function atualizarContador(){
+
     const hoje = new Date();
+
     const diff = hoje - inicio;
 
-    const dias = Math.floor(diff / (1000 * 60 * 60 * 24));
-    const horas = Math.floor((diff / (1000 * 60 * 60)) % 24);
-    const minutos = Math.floor((diff / (1000 * 60)) % 60);
-    const segundos = Math.floor((diff / 1000) % 60);
+    const dias =
+    Math.floor(diff/(1000*60*60*24));
 
-    document.getElementById("contador").innerHTML =
+    const horas =
+    Math.floor((diff/(1000*60*60))%24);
+
+    const minutos =
+    Math.floor((diff/(1000*60))%60);
+
+    const segundos =
+    Math.floor((diff/1000)%60);
+
+    document.getElementById("contador").innerHTML=
     `❤️ Estamos criando memórias há ${dias} dias, ${horas}h ${minutos}m ${segundos}s ❤️`;
+
 }
 
 atualizarContador();
+
 setInterval(atualizarContador,1000);
 
 function criarCoracao(){
-    const heart = document.createElement("div");
+
+    const heart=document.createElement("div");
+
     heart.classList.add("heart");
-    heart.innerHTML = "❤️";
-    heart.style.left = Math.random()*100 + "vw";
-    heart.style.fontSize = (Math.random()*20 + 20) + "px";
+
+    heart.innerHTML="❤️";
+
+    heart.style.left=Math.random()*100+"vw";
+
+    heart.style.fontSize=
+    (15+Math.random()*35)+"px";
+
+    heart.style.animationDuration=
+    (3+Math.random()*5)+"s";
 
     document.body.appendChild(heart);
 
     setTimeout(()=>{
+
         heart.remove();
-    },5000);
+
+    },8000);
+
 }
 
-setInterval(criarCoracao,400);
+setInterval(criarCoracao,250);
 
 </script>
 
